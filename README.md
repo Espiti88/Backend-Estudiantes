@@ -1,6 +1,6 @@
 # Backend-Estudiantes
 
 # Miembros del Equipo:
-# - Carlos Zuluaga M
+# - Carlos Zuluaga Mora
 # - Samuel Espitia Cruz
 # - Fabián Moya
