@@ -35,13 +35,13 @@ public class Controller {
     public List<Estudiante> allEstudiantes(){
         return estudiantes;
     }
-    //http://localhost:8080/estudiantes
+    //http://localhost:8080/estudiante
 
     @RequestMapping(value = "/estudiante/buscar", params = "facultad")
     public List<Estudiante> buscarFacultad(@RequestParam String facultad){
         return estudiantes.stream().filter((estudiante) -> estudiante.getFacultad().equals(facultad)).collect(Collectors.toList());
     }
-    //http://localhost:8080/estudiantes?facultad=
+    //http://localhost:8080/estudiante?facultad=
 
     @PostMapping(path = "/estudiante/crear")
     public String crearEstudiante(@RequestBody Estudiante estudiante){
@@ -55,7 +55,7 @@ public class Controller {
         estudiantes.add(estudiante);
         return "¡Estudiante guardado!";
     }
-    //http://localhost:8080/crear
+    //http://localhost:8080/estudiante/crear
     //POSTMAN:
     //{
     //    "nombre": "Sandra",
@@ -74,7 +74,7 @@ public class Controller {
         }
         return "¡No se encontró el estudiante!";
     }
-    //http://localhost:8080/actualizar/n
+    //http://localhost:8080/estudiante/actualizar/n
     //POSTMAN:
     //{
     //    "id": newId,
@@ -99,5 +99,5 @@ public class Controller {
             return new ResponseEntity<>("¡No se encontró el estudiante!", HttpStatus.NOT_FOUND);
         }
     }
-    //http://localhost:8080/eliminar/n
+    //http://localhost:8080/estudiante/eliminar/n
 }
