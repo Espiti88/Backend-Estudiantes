@@ -31,19 +31,19 @@ public class Controller {
     }
     //http://localhost:8080/
 
-    @GetMapping(path = "/todos")
+    @GetMapping(path = "/estudiante/todos")
     public List<Estudiante> allEstudiantes(){
         return estudiantes;
     }
     //http://localhost:8080/estudiantes
 
-    @RequestMapping(value = "/buscar", params = "facultad")
+    @RequestMapping(value = "/estudiante/buscar", params = "facultad")
     public List<Estudiante> buscarFacultad(@RequestParam String facultad){
         return estudiantes.stream().filter((estudiante) -> estudiante.getFacultad().equals(facultad)).collect(Collectors.toList());
     }
     //http://localhost:8080/estudiantes?facultad=
 
-    @PostMapping(path = "/crear")
+    @PostMapping(path = "/estudiante/crear")
     public String crearEstudiante(@RequestBody Estudiante estudiante){
         for(Estudiante estudianteX: estudiantes){
             if(estudianteX.getId() >= idRegistro){
@@ -63,7 +63,7 @@ public class Controller {
     //    "facultad": "Medicina"
     //}
 
-    @PutMapping(path = "/actualizar/{codigo}")
+    @PutMapping(path = "/estudiante/actualizar/{codigo}")
     public String actualizarEstudiante(@PathVariable("codigo") int codigo, @RequestBody Estudiante estudiante){
         for(Estudiante estudiante1: estudiantes){
             if(estudiante1.getId() == codigo){
@@ -83,7 +83,7 @@ public class Controller {
     //    "facultad": "Medicina"
     //}
 
-    @DeleteMapping(path = "/eliminar/{id}")
+    @DeleteMapping(path = "/estudiante/eliminar/{id}")
     public ResponseEntity<String> eliminarEstudiante(@PathVariable int id) {
         Estudiante EliminacionEstudiante = null;
         for (Estudiante estudiante : estudiantes) {
