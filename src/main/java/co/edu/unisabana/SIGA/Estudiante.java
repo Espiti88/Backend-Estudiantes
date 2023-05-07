@@ -13,6 +13,10 @@ public class Estudiante {
         this.facultad = facultad;
     }
 
+    public Estudiante(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
@@ -45,13 +49,5 @@ public class Estudiante {
         this.facultad = facultad;
     }
 
-    @Override
-    public String toString() {
-        return "Estudiante{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", semestre=" + semestre +
-                ", facultad='" + facultad + '\'' +
-                '}';
-    }
+
 }
