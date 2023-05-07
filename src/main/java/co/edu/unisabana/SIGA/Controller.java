@@ -12,7 +12,7 @@ public class Controller {
     int idRegistro = 1;
     public Controller (){
         this.estudiantes = new ArrayList<>();
-        estudiantes.add(new Estudiante(1, "Carlos Andrés", 3, "Ingeniería"));
+        /*estudiantes.add(new Estudiante(1, "Carlos Andrés", 3, "Ingeniería"));
         estudiantes.add(new Estudiante(2, "Juan José", 3, "Medicina"));
         estudiantes.add(new Estudiante(3, "Laura Sofía", 3, "EICEA"));
         estudiantes.add(new Estudiante(4, "Valentina", 3, "Comunicación"));
@@ -21,7 +21,7 @@ public class Controller {
         estudiantes.add(new Estudiante(7, "María Fernanda", 3, "EICEA"));
         estudiantes.add(new Estudiante(8, "Mateo", 3, "Comunicación"));
         estudiantes.add(new Estudiante(9, "Pavel", 3, "Ingeniería"));
-        estudiantes.add(new Estudiante(10, "Turry", 3, "Medicina"));
+        estudiantes.add(new Estudiante(10, "Turry", 3, "Medicina"));*/
     }
 
     @GetMapping(path = "/")
@@ -34,10 +34,10 @@ public class Controller {
     public List<Estudiante> allEstudiantes(){
         return estudiantes;
     }
-    //http://localhost:8080/estudiante
+    //http://localhost:8080/estudiante/todos
 
-    @RequestMapping(path = "/estudiante/buscar")
-    public List<Estudiante> BuscarPorFacultad (@RequestParam String facultad, @RequestParam int size){
+    @GetMapping(path = "/estudiante/buscar")
+    public List<Estudiante> buscarPorFacultad (@RequestParam String facultad, @RequestParam int size){
         List<Estudiante> BuscarFacultad = new ArrayList<>(size);
         for (Estudiante estudiante : estudiantes) {
             if (estudiante.getFacultad().equals(facultad)) {
@@ -63,13 +63,13 @@ public class Controller {
         estudiantes.add(estudiante);
         return "¡Estudiante guardado!";
     }
-    //http://localhost:8080/estudiante/crear
-    //POSTMAN:
-    //{
-    //    "nombre": "Sandra",
-    //    "semestre": 3,
-    //    "facultad": "Medicina"
-    //}
+    /*http://localhost:8080/estudiante/crear
+    POSTMAN:
+    {
+        "nombre": "Sandra",
+        "semestre": 3,
+        "facultad": "Medicina"
+    }*/
 
     @PutMapping(path = "/estudiante/actualizar/{codigo}")
     public String actualizarEstudiante(@PathVariable("codigo") int codigo, @RequestBody Estudiante estudiante){
@@ -82,14 +82,14 @@ public class Controller {
         }
         return "¡No se encontró el estudiante!";
     }
-    //http://localhost:8080/estudiante/actualizar/n
-    //POSTMAN:
-    //{
-    //    "id": newId,
-    //    "nombre": "Sandra",
-    //    "semestre": 3,
-    //    "facultad": "Medicina"
-    //}
+    /*http://localhost:8080/estudiante/actualizar/n
+    POSTMAN:
+    {
+        "id": newId,
+        "nombre": "Sandra",
+        "semestre": 3,
+        "facultad": "Medicina"
+    }*/
 
     @DeleteMapping(path = "/estudiante/eliminar/{id}")
     public ResponseEntity<String> eliminarEstudiante(@PathVariable int id) {
