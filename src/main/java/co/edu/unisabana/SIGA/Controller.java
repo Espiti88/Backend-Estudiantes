@@ -1,4 +1,6 @@
 package co.edu.unisabana.SIGA;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class Controller {
         estudiantes.add(estudiante);
         return "¡Estudiante guardado!";
     }
-    //http://localhost:8080/estudiantes/crear
+    //http://localhost:8080/crear
     //POSTMAN:
     //{
     //    "nombre": "Sandra",
@@ -67,9 +69,35 @@ public class Controller {
             if(estudiante1.getId() == codigo){
                 estudiantes.remove(estudiante1);
                 estudiantes.add(estudiante);
+                return "¡Estudiante modificado!";
+            }
+        }
+        return "¡No se encontró el estudiante!";
+    }
+    //http://localhost:8080/actualizar/n
+    //POSTMAN:
+    //{
+    //    "id": newId,
+    //    "nombre": "Sandra",
+    //    "semestre": 3,
+    //    "facultad": "Medicina"
+    //}
+
+    @DeleteMapping(path = "/eliminar/{id}")
+    public ResponseEntity<String> eliminarEstudiante(@PathVariable int id) {
+        Estudiante EliminacionEstudiante = null;
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getId() == id) {
+                EliminacionEstudiante = estudiante;
                 break;
             }
         }
-        return "¡Estudiante modificado!";
+        if (EliminacionEstudiante != null) {
+            estudiantes.remove(EliminacionEstudiante);
+            return new ResponseEntity<>("¡Estudiante eliminado!", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("¡No se encontró el estudiante!", HttpStatus.NOT_FOUND);
+        }
     }
+    //http://localhost:8080/eliminar/n
 }

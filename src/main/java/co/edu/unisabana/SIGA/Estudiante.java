@@ -13,10 +13,6 @@ public class Estudiante {
         this.facultad = facultad;
     }
 
-    public Estudiante(int id) {
-        this.id = id;
-    }
-
     public int getId() {
         return id;
     }
@@ -48,6 +44,4 @@ public class Estudiante {
     public void setFacultad(String facultad) {
         this.facultad = facultad;
     }
-
-
 }
