@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class Controller {
@@ -37,11 +36,20 @@ public class Controller {
     }
     //http://localhost:8080/estudiante
 
-    @RequestMapping(value = "/estudiante/buscar", params = "facultad")
-    public List<Estudiante> buscarFacultad(@RequestParam String facultad){
-        return estudiantes.stream().filter((estudiante) -> estudiante.getFacultad().equals(facultad)).collect(Collectors.toList());
+    @RequestMapping(path = "/estudiante/buscar")
+    public List<Estudiante> BuscarPorFacultad (@RequestParam String facultad, @RequestParam int size){
+        List<Estudiante> BuscarFacultad = new ArrayList<>(size);
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getFacultad().equals(facultad)) {
+                BuscarFacultad.add(estudiante);
+            }
+            if(BuscarFacultad.size() == size){
+                break;
+            }
+        }
+        return BuscarFacultad;
     }
-    //http://localhost:8080/estudiante?facultad=
+    //http://localhost:8080/estudiante/buscar?facultad=Medicina&size=5
 
     @PostMapping(path = "/estudiante/crear")
     public String crearEstudiante(@RequestBody Estudiante estudiante){
