@@ -1,6 +1,4 @@
 package co.edu.unisabana.SIGA;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,7 +10,8 @@ public class Controller {
     int idRegistro = 1;
     public Controller (){
         this.estudiantes = new ArrayList<>();
-        /*estudiantes.add(new Estudiante(1, "Carlos Andrés", 3, "Ingeniería"));
+        /*
+        estudiantes.add(new Estudiante(1, "Carlos Andrés", 3, "Ingeniería"));
         estudiantes.add(new Estudiante(2, "Juan José", 3, "Medicina"));
         estudiantes.add(new Estudiante(3, "Laura Sofía", 3, "EICEA"));
         estudiantes.add(new Estudiante(4, "Valentina", 3, "Comunicación"));
@@ -21,7 +20,8 @@ public class Controller {
         estudiantes.add(new Estudiante(7, "María Fernanda", 3, "EICEA"));
         estudiantes.add(new Estudiante(8, "Mateo", 3, "Comunicación"));
         estudiantes.add(new Estudiante(9, "Pavel", 3, "Ingeniería"));
-        estudiantes.add(new Estudiante(10, "Turry", 3, "Medicina"));*/
+        estudiantes.add(new Estudiante(10, "Turry", 3, "Medicina"));
+        */
     }
 
     @GetMapping(path = "/")
@@ -92,20 +92,14 @@ public class Controller {
     }*/
 
     @DeleteMapping(path = "/estudiante/eliminar/{id}")
-    public ResponseEntity<String> eliminarEstudiante(@PathVariable int id) {
-        Estudiante EliminacionEstudiante = null;
+    public String eliminarEstudiante(@PathVariable int id) {
         for (Estudiante estudiante : estudiantes) {
             if (estudiante.getId() == id) {
-                EliminacionEstudiante = estudiante;
-                break;
+                estudiantes.remove(estudiante);
+                return "¡Estudiante eliminado!";
             }
         }
-        if (EliminacionEstudiante != null) {
-            estudiantes.remove(EliminacionEstudiante);
-            return new ResponseEntity<>("¡Estudiante eliminado!", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("¡No se encontró el estudiante!", HttpStatus.NOT_FOUND);
-        }
+        return "¡No se encontró el estudiante!";
     }
     //http://localhost:8080/estudiante/eliminar/n
 }
