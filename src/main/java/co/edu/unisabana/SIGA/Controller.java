@@ -7,7 +7,7 @@ import java.util.List;
 @RestController
 public class Controller {
     List<Estudiante> estudiantes;
-    int idRegistro = 1;
+
     public Controller (){
         this.estudiantes = new ArrayList<>();
         /*
@@ -53,19 +53,13 @@ public class Controller {
 
     @PostMapping(path = "/estudiante/crear")
     public String crearEstudiante(@RequestBody Estudiante estudiante){
-        for(Estudiante estudianteX: estudiantes){
-            if(estudianteX.getId() >= idRegistro){
-                idRegistro += 1;
-            }
-        }
-        estudiante.setId(idRegistro);
-        idRegistro += 1;
         estudiantes.add(estudiante);
-        return "¡Estudiante guardado!";
+        return "¡Estudiante agregado!";
     }
     /*http://localhost:8080/estudiante/crear
     POSTMAN:
     {
+        "id": 1
         "nombre": "Sandra",
         "semestre": 3,
         "facultad": "Medicina"
