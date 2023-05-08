@@ -7,6 +7,7 @@ import java.util.List;
 @RestController
 public class Controller {
     List<Estudiante> estudiantes;
+    int idRegistro = 1000;
 
     public Controller (){
         this.estudiantes = new ArrayList<>();
@@ -23,8 +24,8 @@ public class Controller {
     }
 
     @GetMapping(path = "/")
-    public String saludar() {
-        return "Servidor de Estudiantes DANIEL SAAVEDRA";
+    public Respuesta saludar() {
+        return new Respuesta("Servidor de Estudiantes DANIEL SAAVEDRA");
     }
     //http://localhost:8080/
 
@@ -50,29 +51,35 @@ public class Controller {
     //http://localhost:8080/estudiante/buscar?facultad=Medicina&size=5
 
     @PostMapping(path = "/estudiante/crear")
-    public String crearEstudiante(@RequestBody Estudiante estudiante){
+    public Respuesta crearEstudiante(@RequestBody Estudiante estudiante){
+        for(Estudiante estudianteX: estudiantes){
+            if(estudianteX.getId() >= idRegistro){
+                idRegistro += 1;
+            }
+        }
+        estudiante.setId(idRegistro);
+        idRegistro += 1;
         estudiantes.add(estudiante);
-        return "¡Estudiante agregado!";
+        return new Respuesta("¡Estudiante agregado!");
     }
     /*http://localhost:8080/estudiante/crear
     POSTMAN:
     {
-        "id": 1
         "nombre": "Sandra",
         "semestre": 3,
         "facultad": "Medicina"
     }*/
 
     @PutMapping(path = "/estudiante/actualizar/{codigo}")
-    public String actualizarEstudiante(@PathVariable("codigo") int codigo, @RequestBody Estudiante estudiante){
+    public Respuesta actualizarEstudiante(@PathVariable("codigo") int codigo, @RequestBody Estudiante estudiante){
         for(Estudiante estudiante1: estudiantes){
             if(estudiante1.getId() == codigo){
                 estudiantes.remove(estudiante1);
                 estudiantes.add(estudiante);
-                return "¡Estudiante modificado!";
+                return new Respuesta("¡Estudiante modificado!");
             }
         }
-        return "¡No se encontró el estudiante!";
+        return new Respuesta ("¡No se encontró el estudiante!");
     }
     /*http://localhost:8080/estudiante/actualizar/n
     POSTMAN:
@@ -84,14 +91,14 @@ public class Controller {
     }*/
 
     @DeleteMapping(path = "/estudiante/eliminar/{id}")
-    public String eliminarEstudiante(@PathVariable int id) {
+    public Respuesta eliminarEstudiante(@PathVariable int id) {
         for (Estudiante estudiante : estudiantes) {
             if (estudiante.getId() == id) {
                 estudiantes.remove(estudiante);
-                return "¡Estudiante eliminado!";
+                return new Respuesta("¡Estudiante eliminado!");
             }
         }
-        return "¡No se encontró el estudiante!";
+        return new Respuesta("¡No se encontró el estudiante!");
     }
     //http://localhost:8080/estudiante/eliminar/n
 }
