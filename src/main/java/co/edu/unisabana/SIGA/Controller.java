@@ -10,7 +10,6 @@ public class Controller {
 
     public Controller (){
         this.estudiantes = new ArrayList<>();
-        /*
         estudiantes.add(new Estudiante(1, "Carlos Andrés", 3, "Ingeniería"));
         estudiantes.add(new Estudiante(2, "Juan José", 3, "Medicina"));
         estudiantes.add(new Estudiante(3, "Laura Sofía", 3, "EICEA"));
@@ -21,7 +20,6 @@ public class Controller {
         estudiantes.add(new Estudiante(8, "Mateo", 3, "Comunicación"));
         estudiantes.add(new Estudiante(9, "Pavel", 3, "Ingeniería"));
         estudiantes.add(new Estudiante(10, "Turry", 3, "Medicina"));
-        */
     }
 
     @GetMapping(path = "/")
