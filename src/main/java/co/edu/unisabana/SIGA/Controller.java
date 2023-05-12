@@ -7,7 +7,7 @@ import java.util.List;
 @RestController
 public class Controller {
     List<Estudiante> estudiantes = new ArrayList<>();
-
+    int registro = 100001;
     @GetMapping(path = "/")
     public String saludar() {
         return "Servidor de Estudiantes";
@@ -34,7 +34,11 @@ public class Controller {
 
     @PostMapping(path = "/estudiante/crear")
     public Respuesta crearEstudiante(@RequestBody Estudiante estudiante){
+        estudiante.setId(registro);
         estudiantes.add(estudiante);
+
+        registro += 1;
+
         return new Respuesta("Estudiante agregado correctamente");
     }
 
@@ -42,7 +46,6 @@ public class Controller {
     public String actualizarEstudiante(@PathVariable("codigo") int codigo, @RequestBody Estudiante estudiante){
         for(Estudiante elEstudiante: estudiantes){
             if(elEstudiante.getId() == codigo){
-                elEstudiante.setId(estudiante.getId());
                 elEstudiante.setNombre(estudiante.getNombre());
                 elEstudiante.setFacultad(estudiante.getFacultad());
                 elEstudiante.setSemestre(estudiante.getSemestre());
