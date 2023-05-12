@@ -49,6 +49,7 @@ public class Controller {
                 elEstudiante.setNombre(estudiante.getNombre());
                 elEstudiante.setFacultad(estudiante.getFacultad());
                 elEstudiante.setSemestre(estudiante.getSemestre());
+                elEstudiante.setPrograma(estudiante.getPrograma());
 
                 return "¡Estudiante modificado!";
             }

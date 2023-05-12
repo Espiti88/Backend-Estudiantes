@@ -5,17 +5,18 @@ public class Estudiante {
     private String nombre;
     private int semestre;
     private String facultad;
+    private String programa;
 
     public Estudiante()
     {
         super();
     }
 
-    public Estudiante(int id, String nombre, int semestre, String facultad) {
-        this.id = id;
+    public Estudiante(String nombre, int semestre, String facultad, String programa) {
         this.nombre = nombre;
         this.semestre = semestre;
         this.facultad = facultad;
+        this.programa = programa;
     }
 
     public int getId() {
@@ -48,5 +49,13 @@ public class Estudiante {
 
     public void setFacultad(String facultad) {
         this.facultad = facultad;
+    }
+
+    public String getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(String programa) {
+        this.programa = programa;
     }
 }
